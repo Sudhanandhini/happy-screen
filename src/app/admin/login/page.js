@@ -54,7 +54,7 @@ export default function AdminLoginPage() {
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+        background: ' #fdfafaff ',
         py: 4
       }}
     >
@@ -112,9 +112,9 @@ export default function AdminLoginPage() {
               sx={{ 
                 mt: 3,
                 py: 1.5,
-                background: 'linear-gradient(45deg, #A855F7, #60A5FA)',
+                background: 'linear-gradient(45deg, #c20b17ff , #D50A17 )',
                 '&:hover': {
-                  background: 'linear-gradient(45deg, #7C3AED, #3B82F6)'
+                  background: 'linear-gradient( 135deg, #000 0%, #D50A17 100%)'
                 }
               }}
             >

@@ -121,7 +121,7 @@ export default function SlotsPage() {
         <Box sx={{ flexGrow: 1 }} />
         <Button variant="contained" startIcon={<Add />} onClick={openNew}>Add Slot</Button>
       </Box>
-      <Container maxWidth="md" sx={{ mt: 4 }}>
+      <Container maxWidth="md" sx={{ my:4 }}>
         {error && <Alert severity="error" sx={{ mb: 3 }} onClose={() => setError('')}>{error}</Alert>}
         {success && <Alert severity="success" sx={{ mb: 3 }} onClose={() => setSuccess('')}>{success}</Alert>}
         <Paper>
@@ -170,7 +170,7 @@ export default function SlotsPage() {
         </Paper>
       </Container>
 
-      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="xs" fullWidth>
+      <Dialog open={dialogOpen} onClose={() => setDialogOpen(false)} maxWidth="xs" fullWidth >
         <DialogTitle>{isEdit ? 'Edit' : 'New'} Slot</DialogTitle>
         <DialogContent>
           <TextField

@@ -312,7 +312,7 @@ export default function LocationsCarousel() {
     </Box>
 
     {/* Carousel */}
-    <Box sx={{ width: "100%", position: "relative" }}>
+    <Box sx={{ width: "100%", position: "relative", marginTop: '50px' }}>
       <Fade in={fade} timeout={400}>
         <Box sx={{ display: "flex", gap: 2, justifyContent: "center" }}>
           {visible.map(loc => (
@@ -325,9 +325,9 @@ export default function LocationsCarousel() {
                 <Typography variant="body2" color="text.secondary">
                   {loc.addr}
                 </Typography>
-                <Divider sx={{ my: 1 }} />
-                <Typography variant="body2">📞 {loc.phone}</Typography>
-                <Typography variant="body2">✉️ {loc.email}</Typography>
+                <Divider sx={{ my: 2 }} />
+                <Typography variant="body2" >📞 {loc.phone}</Typography>
+                <Typography variant="body2" sx={{marginTop:'10px'}}>✉️ {loc.email}</Typography>
               </CardContent>
             </Card>
           ))}

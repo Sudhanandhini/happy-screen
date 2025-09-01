@@ -180,14 +180,14 @@ export default function SuperAdminDashboard() {
   ]
 
   return (
-    <Box sx={{ flexGrow: 1, bgcolor: 'grey.100', minHeight: '100vh' }}>
+    <Box sx={{ flexGrow: 1, bgcolor: 'grey.100', minHeight: '100vh',  }}>
       {/* Header */}
       <Box sx={{ bgcolor: 'white', boxShadow: 1, px: 3, py: 2 }}>
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+        <Box sx={{   display: { xs: 'block', sm: 'flex' }, justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="h5" fontWeight="bold">
             Super Admin Dashboard
           </Typography>
-          <Box sx={{ display: 'flex', gap: 2 }}>
+          <Box sx={{ display: 'flex', gap: 2, mt: {xs: 1} }}>
             <Button
               variant="outlined"
               onClick={() => handleNavigation('/admin/users')}
@@ -207,12 +207,12 @@ export default function SuperAdminDashboard() {
         </Box>
       </Box>
 
-      <Container maxWidth="lg" sx={{ mt: 4, pb: 4 }}>
+      <Container maxWidth="lg" sx={{ mt: 7, pb: 4 }}>
         {/* Stats Cards */}
         <Grid container spacing={3} sx={{ mb: 4 }}>
           {statCards.map((stat, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
-              <Card sx={{ height: '100%' }}>
+              <Card sx={{ height: '100%', width:150 }}>
                 <CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', mb: 2 }}>
                     <Box sx={{

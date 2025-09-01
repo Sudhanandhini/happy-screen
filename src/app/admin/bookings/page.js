@@ -111,7 +111,7 @@ export default function BookingsManagementPage() {
       if (dateRange.endDate) params.append('endDate', dateRange.endDate)
 
       const response = await fetch(`/api/admin/bookings?${params.toString()}`)
-      
+
       if (!response.ok) throw new Error('Failed to load bookings')
 
       const data = await response.json()
@@ -176,7 +176,7 @@ export default function BookingsManagementPage() {
     })
     setEditDialogOpen(true)
     handleMenuClose()
-    
+
     // Load time slots for the selected screen and date
     if (booking.screen?.id && booking.bookingDate) {
       loadTimeSlots(booking.screen.id, new Date(booking.bookingDate).toISOString().split('T')[0])
@@ -321,26 +321,19 @@ export default function BookingsManagementPage() {
       {/* Header */}
       <Box sx={{ bgcolor: 'white', boxShadow: 1, px: 3, py: 2 }}>
         <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-            <IconButton onClick={() => router.back()}>
-              <ArrowBack />
-            </IconButton>
-            <Box>
-              <Typography variant="h5" fontWeight="bold">
-                Booking Management
-              </Typography>
-              <Typography variant="body2" color="text.secondary">
-                Manage all customer bookings
-              </Typography>
-            </Box>
+          <Box>
+            <Typography variant="h5" fontWeight="bold">
+              Booking Management
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              Manage all customer bookings
+            </Typography>
           </Box>
-          {/* <Button 
-            variant="contained" 
-            startIcon={<Add />}
-            onClick={() => router.push('/admin/bookings/create')}
-          >
-            New Booking
-          </Button> */}
+          <Box>
+            <Button startIcon={<ArrowBack />} onClick={() => router.back()}>
+              Back
+            </Button>
+          </Box>
         </Box>
       </Box>
 
@@ -495,7 +488,7 @@ export default function BookingsManagementPage() {
             {error}
           </Alert>
         )}
-        
+
         {success && (
           <Alert severity="success" sx={{ mb: 3 }} onClose={clearMessages}>
             {success}
@@ -505,33 +498,33 @@ export default function BookingsManagementPage() {
         {/* Tabs */}
         <Paper sx={{ mb: 2 }}>
           <Tabs value={tabValue} onChange={(e, newValue) => setTabValue(newValue)}>
-            <Tab 
+            <Tab
               label={
                 <Badge badgeContent={bookings.length} color="primary">
                   All Bookings
                 </Badge>
-              } 
+              }
             />
-            <Tab 
+            <Tab
               label={
                 <Badge badgeContent={bookings.filter(b => b.bookingStatus === 'confirmed').length} color="success">
                   Confirmed
                 </Badge>
-              } 
+              }
             />
-            <Tab 
+            <Tab
               label={
                 <Badge badgeContent={bookings.filter(b => b.bookingStatus === 'cancelled').length} color="error">
                   Cancelled
                 </Badge>
-              } 
+              }
             />
-            <Tab 
+            <Tab
               label={
                 <Badge badgeContent={bookings.filter(b => b.bookingStatus === 'completed').length} color="info">
                   Completed
                 </Badge>
-              } 
+              }
             />
           </Tabs>
         </Paper>
@@ -543,7 +536,7 @@ export default function BookingsManagementPage() {
               <TableHead>
                 <TableRow sx={{ bgcolor: 'grey.50' }}>
                   <TableCell sx={{ fontWeight: 'bold' }}>Booking ID</TableCell>
-                  <TableCell sx={{ fontWeight: 'bold' }}>Customer</TableCell> 
+                  <TableCell sx={{ fontWeight: 'bold' }}>Customer</TableCell>
                   <TableCell sx={{ fontWeight: 'bold' }}>Event</TableCell>
                   <TableCell sx={{ fontWeight: 'bold' }}>Date & Time</TableCell>
                   <TableCell sx={{ fontWeight: 'bold' }}>Screen</TableCell>
@@ -612,21 +605,21 @@ export default function BookingsManagementPage() {
                         <Typography variant="body2" fontWeight="bold">
                           ₹{booking.pricing?.totalAmount?.toLocaleString()}
                         </Typography>
-                        <Chip 
+                        <Chip
                           label={booking.paymentInfo?.paymentStatus}
                           color={getPaymentStatusColor(booking.paymentInfo?.paymentStatus)}
                           size="small"
                         />
                       </TableCell>
                       <TableCell>
-                        <Chip 
+                        <Chip
                           label={booking.bookingStatus.replace('_', ' ')}
                           color={getStatusColor(booking.bookingStatus)}
                           size="small"
                         />
                       </TableCell>
                       <TableCell>
-                        <IconButton 
+                        <IconButton
                           onClick={(e) => handleMenuClick(e, booking)}
                           size="small"
                         >
@@ -658,7 +651,7 @@ export default function BookingsManagementPage() {
               <Edit sx={{ mr: 2 }} />
               Edit Booking
             </MenuOption>
-            <MenuOption 
+            <MenuOption
               key="cancel"
               onClick={() => openCancelDialog(menuBooking)}
               sx={{ color: 'warning.main' }}
@@ -710,7 +703,7 @@ export default function BookingsManagementPage() {
                 <Typography variant="subtitle2" color="text.secondary">Total Amount</Typography>
                 <Typography variant="body1">₹{selectedBooking.pricing?.totalAmount?.toLocaleString()}</Typography>
               </Grid>
-              
+
               {/* ✅ Enhanced Special Requests Display */}
               <Grid item xs={12}>
                 <Typography variant="subtitle2" color="text.secondary" gutterBottom>
@@ -720,61 +713,61 @@ export default function BookingsManagementPage() {
                   <Box>
                     {/* Display boolean flags as chips */}
                     {selectedBooking.specialRequests.decorations && (
-                      <Chip 
-                        label="🎈 Decorations" 
-                        size="small" 
-                        color="primary" 
-                        sx={{ mr: 1, mb: 1 }} 
+                      <Chip
+                        label="🎈 Decorations"
+                        size="small"
+                        color="primary"
+                        sx={{ mr: 1, mb: 1 }}
                       />
                     )}
                     {selectedBooking.specialRequests.cake && (
-                      <Chip 
-                        label="🎂 Cake Arrangement" 
-                        size="small" 
-                        color="primary" 
-                        sx={{ mr: 1, mb: 1 }} 
+                      <Chip
+                        label="🎂 Cake Arrangement"
+                        size="small"
+                        color="primary"
+                        sx={{ mr: 1, mb: 1 }}
                       />
                     )}
                     {selectedBooking.specialRequests.photography && (
-                      <Chip 
-                        label="📸 Photography Service" 
-                        size="small" 
-                        color="primary" 
-                        sx={{ mr: 1, mb: 1 }} 
+                      <Chip
+                        label="📸 Photography Service"
+                        size="small"
+                        color="primary"
+                        sx={{ mr: 1, mb: 1 }}
                       />
                     )}
-                    
+
                     {/* Display custom message */}
                     {selectedBooking.specialRequests.customMessage && (
                       <Box sx={{ mt: 2 }}>
                         <Typography variant="body2" fontWeight="bold" gutterBottom>
                           Special Instructions:
                         </Typography>
-                        <Typography 
-                          variant="body2" 
-                          sx={{ 
-                            fontStyle: 'italic', 
-                            p: 2, 
-                            bgcolor: 'grey.50', 
+                        <Typography
+                          variant="body2"
+                          sx={{
+                            fontStyle: 'italic',
+                            p: 2,
+                            bgcolor: 'grey.50',
                             border: '1px solid',
                             borderColor: 'grey.200',
-                            borderRadius: 1 
+                            borderRadius: 1
                           }}
                         >
                           {selectedBooking.specialRequests.customMessage}
                         </Typography>
                       </Box>
                     )}
-                    
+
                     {/* Show "None" if no requests */}
-                    {!selectedBooking.specialRequests.decorations && 
-                     !selectedBooking.specialRequests.cake && 
-                     !selectedBooking.specialRequests.photography && 
-                     !selectedBooking.specialRequests.customMessage && (
-                      <Typography variant="body2" color="text.secondary">
-                        No special requests
-                      </Typography>
-                    )}
+                    {!selectedBooking.specialRequests.decorations &&
+                      !selectedBooking.specialRequests.cake &&
+                      !selectedBooking.specialRequests.photography &&
+                      !selectedBooking.specialRequests.customMessage && (
+                        <Typography variant="body2" color="text.secondary">
+                          No special requests
+                        </Typography>
+                      )}
                   </Box>
                 ) : (
                   <Typography variant="body2" color="text.secondary">
@@ -812,15 +805,15 @@ export default function BookingsManagementPage() {
                   </Select>
                 </FormControl>
               </Grid>
-              
+
               <Grid item xs={12} sm={6}>
                 <TextField
                   type="number"
                   label="Number of Guests"
                   value={editBooking.numberOfGuests}
-                  onChange={(e) => setEditBooking(prev => ({ 
-                    ...prev, 
-                    numberOfGuests: parseInt(e.target.value) || 1 
+                  onChange={(e) => setEditBooking(prev => ({
+                    ...prev,
+                    numberOfGuests: parseInt(e.target.value) || 1
                   }))}
                   inputProps={{ min: 1, max: 50 }}
                   fullWidth
@@ -965,7 +958,7 @@ export default function BookingsManagementPage() {
         </DialogContent>
         <DialogActions>
           <Button onClick={() => setEditDialogOpen(false)}>Cancel</Button>
-          <Button 
+          <Button
             onClick={handleSaveEdit}
             variant="contained"
             disabled={loading}
@@ -1002,7 +995,7 @@ export default function BookingsManagementPage() {
           <Button onClick={() => setCancelDialogOpen(false)} disabled={loading}>
             Cancel
           </Button>
-          <Button 
+          <Button
             onClick={handleCancelBooking}
             color="error"
             variant="contained"

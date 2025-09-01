@@ -129,6 +129,7 @@ const HeroSection = () => {
         subtitle: `${location.address?.area}, ${location.address?.city}`,
         description: `Contact: ${location.contactInfo?.phone}`,
         color: '#D50A17',
+        // style: {width:'300px'},
         onClick: () => handleLocationClick(location)
       })),
       ...screens.map(screen => ({
@@ -161,6 +162,7 @@ const HeroSection = () => {
       <Fade in timeout={500} key={currentSlide}>
         <Card
           sx={{
+            width: 300,
             bgcolor: 'rgba(255,255,255,0.1)',
             backdropFilter: 'blur(20px)',
             borderRadius: 3,
@@ -413,7 +415,7 @@ const HeroSection = () => {
                     <Grid item xs={6} sm={6} md={3} key={index}>
                       <Slide direction="up" in timeout={1000 + index * 200}>
                         <Card 
-                          sx={{ 
+                          sx={{ width: 150,
                             textAlign: 'center',
                             bgcolor: 'rgba(255,255,255,0.1)', 
                             backdropFilter: 'blur(20px)', 
@@ -515,7 +517,7 @@ const HeroSection = () => {
                   <Grid container spacing={2}>
                     <Grid item xs={4}>
                       <Card 
-                        sx={{ 
+                        sx={{ width: 90,
                           bgcolor: 'rgba(255,255,255,0.1)', 
                           backdropFilter: 'blur(10px)', 
                           textAlign: 'center', 
@@ -542,7 +544,7 @@ const HeroSection = () => {
                     </Grid>
                     <Grid item xs={4}>
                       <Card 
-                        sx={{ 
+                        sx={{  width: 90,
                           bgcolor: 'rgba(255,255,255,0.1)', 
                           backdropFilter: 'blur(10px)', 
                           textAlign: 'center', 
@@ -569,7 +571,7 @@ const HeroSection = () => {
                     </Grid>
                     <Grid item xs={4}>
                       <Card 
-                        sx={{ 
+                        sx={{ width:90,
                           bgcolor: 'rgba(255,255,255,0.1)', 
                           backdropFilter: 'blur(10px)', 
                           textAlign: 'center', 

@@ -25,10 +25,10 @@ import {
   Paper,
   Chip
 } from '@mui/material'
-import { 
-  Delete, 
-  ArrowBack, 
-  CloudUpload, 
+import {
+  Delete,
+  ArrowBack,
+  CloudUpload,
   PhotoLibrary,
   Visibility,
   Close,
@@ -71,7 +71,7 @@ export default function GalleryPage() {
         if (selectedScreen && selectedScreen !== '') {
           params.append('screen', selectedScreen)
         }
-        
+
         const [locRes, imgRes] = await Promise.all([
           fetch('/api/admin/locations'),
           fetch(`/api/admin/gallery?${params.toString()}`)
@@ -103,7 +103,7 @@ export default function GalleryPage() {
         setSelectedScreen('')
         return
       }
-      
+
       try {
         const res = await fetch(`/api/admin/screens?location=${selectedLocation}`)
         const data = await res.json()
@@ -131,7 +131,7 @@ export default function GalleryPage() {
       setError('Please select a location')
       return
     }
-    
+
     setUploading(true)
     try {
       const formData = new FormData()
@@ -163,11 +163,11 @@ export default function GalleryPage() {
   async function deleteImage(imageId) {
     if (!confirm('Are you sure you want to delete this image?')) return
     try {
-      const res = await fetch(`/api/admin/gallery/${imageId}`, { 
-        method: 'DELETE' 
+      const res = await fetch(`/api/admin/gallery/${imageId}`, {
+        method: 'DELETE'
       })
       const data = await res.json()
-      
+
       if (!res.ok) throw new Error(data.error || 'Delete failed')
 
       setSuccess('Image deleted successfully')
@@ -195,12 +195,16 @@ export default function GalleryPage() {
   return (
     <Box sx={{ bgcolor: 'grey.100', minHeight: '100vh' }}>
       {/* Header */}
-      <Box sx={{ bgcolor: 'white', px: 3, py: 2, display: 'flex', alignItems: 'center', gap: 2, boxShadow: 1 }}>
-        <Button startIcon={<ArrowBack />} onClick={() => router.back()}>
-          Back
-        </Button>
-        <PhotoLibrary sx={{ color: 'primary.main' }} />
-        <Typography variant="h5" fontWeight="bold">Gallery Management</Typography>
+      <Box sx={{ bgcolor: 'white', px: 3, py: 2, display: 'flex', alignItems: 'center', gap: 2, boxShadow: 1, justifyContent: 'space-between' }}>
+        <Box sx={{display:'flex', gap:'10px'}} >
+          <PhotoLibrary sx={{ color: 'primary.main' }} />
+          <Typography variant="h5" fontWeight="bold">Gallery Management</Typography>
+        </Box>
+        <Box>
+          <Button startIcon={<ArrowBack />} onClick={() => router.back()}>
+            Back
+          </Button>
+        </Box>
       </Box>
 
       <Container maxWidth="xl" sx={{ mt: 4, mb: 4 }}>
@@ -222,13 +226,13 @@ export default function GalleryPage() {
             <CloudUpload sx={{ mr: 1 }} />
             Upload New Images
           </Typography>
-          
+
           <Grid container spacing={2} sx={{ mb: 2 }}>
             <Grid item xs={12} sm={6} md={4}>
               <FormControl fullWidth required>
                 <InputLabel>Location</InputLabel>
-                <Select 
-                  value={selectedLocation} 
+                <Select
+                  value={selectedLocation}
                   onChange={e => {
                     setSelectedLocation(e.target.value || '')
                     setSelectedScreen('') // Reset screen when location changes
@@ -243,13 +247,13 @@ export default function GalleryPage() {
                 </Select>
               </FormControl>
             </Grid>
-            
+
             <Grid item xs={12} sm={6} md={4}>
               <FormControl fullWidth>
                 <InputLabel>Screen (Optional)</InputLabel>
-                <Select 
-                  value={selectedScreen} 
-                  onChange={e => setSelectedScreen(e.target.value || '')} 
+                <Select
+                  value={selectedScreen}
+                  onChange={e => setSelectedScreen(e.target.value || '')}
                   disabled={!selectedLocation || screens.length === 0}
                   label="Screen (Optional)"
                 >
@@ -303,14 +307,14 @@ export default function GalleryPage() {
             <Grid item xs={12} sm={6} md={4}>
               <FormControl fullWidth>
                 <InputLabel>Location</InputLabel>
-                <Select 
-                  value={selectedLocation} 
+                <Select
+                  value={selectedLocation}
                   onChange={e => {
                     setSelectedLocation(e.target.value || '')
                     setSelectedScreen('') // Reset screen when location changes
                   }}
                   label="Location"
-                  sx={{minWidth: "200px"}}
+                  sx={{ minWidth: "200px" }}
                 >
                   <MenuItem value="">All Locations</MenuItem>
                   {locations.map(loc => (
@@ -321,16 +325,16 @@ export default function GalleryPage() {
                 </Select>
               </FormControl>
             </Grid>
-            
+
             <Grid item xs={12} sm={6} md={4}>
               <FormControl fullWidth>
                 <InputLabel>Screen</InputLabel>
-                <Select 
-                  value={selectedScreen} 
-                  onChange={e => setSelectedScreen(e.target.value || '')} 
+                <Select
+                  value={selectedScreen}
+                  onChange={e => setSelectedScreen(e.target.value || '')}
                   disabled={!selectedLocation || screens.length === 0}
                   label="Screen"
-                  sx={{minWidth: "200px"}}
+                  sx={{ minWidth: "200px" }}
                 >
                   <MenuItem value="">All Screens</MenuItem>
                   {screens.map(scr => (
@@ -365,7 +369,7 @@ export default function GalleryPage() {
                     height="200"
                     image={img.url}
                     alt={img.alt || 'Gallery Image'}
-                    sx={{ 
+                    sx={{
                       objectFit: 'cover',
                       cursor: 'pointer'
                     }}
@@ -378,7 +382,7 @@ export default function GalleryPage() {
                     <Typography variant="caption" color="text.secondary" display="block">
                       Uploaded: {new Date(img.createdAt).toLocaleDateString()}
                     </Typography>
-                    
+
                     <Box sx={{ mt: 1, display: 'flex', gap: 0.5, flexWrap: 'wrap' }}>
                       {img.location && (
                         <Chip

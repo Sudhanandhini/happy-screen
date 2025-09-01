@@ -351,7 +351,7 @@ export default function PublicScreensPage() {
                           size="large"
                           fullWidth
                           onClick={() => handleBookNow(screen)}
-                          sx={{ mt: '10px',
+                          sx={{ mt: '30px',
                             py: 1.2,
                             fontWeight: 'bold',
                             borderRadius: 2,
